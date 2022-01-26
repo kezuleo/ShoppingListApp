@@ -57,47 +57,47 @@ class ShopItemViewModel : ViewModel() {
         val fieldsValid = validateInput(name, count)
         if (fieldsValid) {
             _shopItem.value?.let {
-            val item = it.copy(name = name, count = count)
-            editShopItemUseCase.editShopItem(item)
-            finishWork()
+                val item = it.copy(name = name, count = count)
+                editShopItemUseCase.editShopItem(item)
+                finishWork()
+            }
         }
     }
-}
 
-private fun parseName(inputName: String?): String {
-    return inputName?.trim() ?: ""
-}
-
-private fun parseCount(inputCount: String?): Int {
-    return try {
-        inputCount?.trim()?.toInt() ?: 0
-    } catch (e: NullPointerException) {
-        0
+    private fun parseName(inputName: String?): String {
+        return inputName?.trim() ?: ""
     }
-}
 
-private fun validateInput(name: String, count: Int): Boolean {
-    var result = true
-    if (name.isBlank()) {
-        _errorInputName.value = true
-        result = false
+    private fun parseCount(inputCount: String?): Int {
+        return try {
+            inputCount?.trim()?.toInt() ?: 0
+        } catch (e: Exception) {
+            0
+        }
     }
-    if (count <= 0) {
-        _errorInputCount.value = true
-        result = false
+
+    private fun validateInput(name: String, count: Int): Boolean {
+        var result = true
+        if (name.isBlank()) {
+            _errorInputName.value = true
+            result = false
+        }
+        if (count <= 0) {
+            _errorInputCount.value = true
+            result = false
+        }
+        return result
     }
-    return result
-}
 
-fun resetErrorInputName() {
-    _errorInputName.value = false
-}
+    fun resetErrorInputName() {
+        _errorInputName.value = false
+    }
 
-fun resetErrorInputCount() {
-    _errorInputCount.value = false
-}
+    fun resetErrorInputCount() {
+        _errorInputCount.value = false
+    }
 
-private fun finishWork() {
-    _shouldCloseScreen.value = Unit
-}
+    private fun finishWork() {
+        _shouldCloseScreen.value = Unit
+    }
 }
