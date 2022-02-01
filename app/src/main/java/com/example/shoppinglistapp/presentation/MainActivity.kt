@@ -35,24 +35,25 @@ class MainActivity : AppCompatActivity() {
             shopListAdapter = ShopListAdapter()
             adapter = shopListAdapter
             recycledViewPool.setMaxRecycledViews(
-                ShopListAdapter.ENABLED_VIEW_TYPE,
+                ShopListAdapter.VIEW_TYPE_ENABLED,
                 ShopListAdapter.MAX_POOL_SIZE
             )
             recycledViewPool.setMaxRecycledViews(
-                ShopListAdapter.DISABLED_VIEW_TYPE,
+                ShopListAdapter.VIEW_TYPE_DISABLED,
                 ShopListAdapter.MAX_POOL_SIZE
             )
         }
-        setUpLongClickListener()
-        setUpClickListener()
-        setUpSwipeListener(rvShopList)
+        setupLongClickListener()
+        setupClickListener()
+        setupSwipeListener(rvShopList)
     }
 
-    private fun setUpSwipeListener(rvShopList: RecyclerView) {
-        val swipeGesture = object : ItemTouchHelper.SimpleCallback(
+    private fun setupSwipeListener(rvShopList: RecyclerView) {
+        val callback = object : ItemTouchHelper.SimpleCallback(
             0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
+
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -66,11 +67,11 @@ class MainActivity : AppCompatActivity() {
                 viewModel.deleteShopItem(item)
             }
         }
-        val itemTouchHelper = ItemTouchHelper(swipeGesture)
+        val itemTouchHelper = ItemTouchHelper(callback)
         itemTouchHelper.attachToRecyclerView(rvShopList)
     }
 
-    private fun setUpClickListener() {
+    private fun setupClickListener() {
         shopListAdapter.onShopItemClickListener = {
             Log.d("MainActivity", it.toString())
             val intent = ShopItemActivity.newIntentEditItem(this, it.id)
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpLongClickListener() {
+    private fun setupLongClickListener() {
         shopListAdapter.onShopItemLongClickListener = {
             viewModel.changeEnableState(it)
         }
