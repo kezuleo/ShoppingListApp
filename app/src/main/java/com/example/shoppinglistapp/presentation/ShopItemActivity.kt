@@ -8,7 +8,7 @@ import com.example.shoppinglistapp.R
 import com.example.shoppinglistapp.domain.ShopItem
 import java.lang.RuntimeException
 
-class ShopItemActivity : AppCompatActivity() {
+class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishingListener {
 
     private var screenMode = MODE_UNKNOWN
     private var shopItemId = ShopItem.UNDEFINED_ID
@@ -20,6 +20,10 @@ class ShopItemActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             launchRightMode()
         }
+    }
+
+    override fun onEditingFinished() {
+        finish()
     }
 
     private fun launchRightMode() {
