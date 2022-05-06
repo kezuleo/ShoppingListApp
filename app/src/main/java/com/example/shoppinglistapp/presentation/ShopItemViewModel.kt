@@ -17,12 +17,10 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class ShopItemViewModel @Inject constructor(
-    application: Application,
-    private val repository: ShopListRepositoryImpl,
     private val getShopItemUseCase: GetShopItemUseCase,
     private val addShopItemUseCase: AddShopItemUseCase,
     private val editShopItemUseCase: EditShopItemUseCase
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
 
     private val _errorInputName = MutableLiveData<Boolean>()
