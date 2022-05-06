@@ -1,18 +1,12 @@
 package com.example.shoppinglistapp.data
 
-import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.example.shoppinglistapp.domain.ShopItem
 import com.example.shoppinglistapp.domain.ShopListRepository
-import java.lang.RuntimeException
 import javax.inject.Inject
-import kotlin.random.Random
 
 class ShopListRepositoryImpl @Inject constructor(
-    application: Application,
     private val shopListDao: ShopListDao,
     private val mapper: ShopListMapper
 ) : ShopListRepository {

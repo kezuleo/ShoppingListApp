@@ -20,7 +20,6 @@ class MainViewModel @Inject constructor(
     private val getShopListUseCase: GetShopListUseCase,
     private val deleteShopItemUseCase: DeleteShopItemUseCase,
     private val editShopItemUseCase: EditShopItemUseCase,
-    private val repository: ShopListRepositoryImpl
 ) : ViewModel() {
 
     val shopList = getShopListUseCase.getShopList()

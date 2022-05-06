@@ -20,12 +20,12 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishingLis
     private lateinit var shopListAdapter: ShopListAdapter
     private lateinit var binding: ActivityMainBinding
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private val component by lazy {
         (application as ShopListApp).component
     }
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)

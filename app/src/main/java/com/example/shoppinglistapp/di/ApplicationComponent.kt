@@ -7,6 +7,7 @@ import com.example.shoppinglistapp.presentation.ShopItemFragment
 import dagger.BindsInstance
 import dagger.Component
 
+@ApplicationScope
 @Component(
     modules = [
         DataModule::class,
