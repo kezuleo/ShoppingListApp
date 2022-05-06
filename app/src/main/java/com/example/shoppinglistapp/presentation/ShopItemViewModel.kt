@@ -13,15 +13,17 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.lang.NullPointerException
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class ShopItemViewModel(application: Application) : AndroidViewModel(application) {
+class ShopItemViewModel @Inject constructor(
+    application: Application,
+    private val repository: ShopListRepositoryImpl,
+    private val getShopItemUseCase: GetShopItemUseCase,
+    private val addShopItemUseCase: AddShopItemUseCase,
+    private val editShopItemUseCase: EditShopItemUseCase
+) : AndroidViewModel(application) {
 
-    private val repository = ShopListRepositoryImpl(application)
-
-    private val getShopItemUseCase = GetShopItemUseCase(repository)
-    private val addShopItemUseCase = AddShopItemUseCase(repository)
-    private val editShopItemUseCase = EditShopItemUseCase(repository)
 
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>
